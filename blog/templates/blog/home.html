@@ -1,40 +1,56 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    {% if posts%}
-        {% for post in posts %}
+    <div class="row">
+        <div class="col-8">
+
+            {% if posts%}
+                {% for post in posts %}
         
-            <div class="row">
-                <div class="col-8">
                     <div class="card w-100 mb-3" style="width: 18rem;">
                 
                         <div class="card-body">
                           <h5 class="card-title">{{ post.title }}</h5>
                           <footer class="blockquote-footer mt-2"><cite title="Source Title">{{post.author}}</cite></footer>
                           <p class="card-text">{{ post.article }}</p>
-                          <a href="#" class="btn btn-primary">Read Detail</a>
+                          <a href="{% url 'blog:post-detail' post.id %}" class="btn btn-primary">Read Detail</a>
                         </div>
                         <div class="card-footer text-muted">
                             {{post.publishedAt}}
                         </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="mb-3">
-                        <label for="exampleDropdownFormEmail2" class="form-label">Filter Articles</label>
-                        <input type="search" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
-                      </div>
-    
-                        
-                        <div class="mb-3">
-                          <label for="exampleDropdownFormPassword2" class="form-label">Search</label>
-                          <input type="search" class="form-control" id="exampleDropdownFormPassword2" placeholder="Search">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
+           
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-4">
+            <div class="mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Filter Posts</h5>
+
+                    </div>
+                    <div class="card-body">
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="author">Author</option>
+                            <option value="title">Title</option>
+                            <option value="publishedDay">Published Day</option>
+                          </select>
+
+                          <div class="mb-3 mt-3">
+                            <label for="exampleDropdownFormPassword2" class="form-label"> <b> Search</b></label>
+                            <input type="search" class="form-control" id="exampleDropdownFormPassword2" placeholder="Search">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+              
                 </div>
             </div>
 
-           
-        {% endfor %}
-    {% endif %}
+                
+               
+        </div>
+    </div>
+
 {% endblock %}

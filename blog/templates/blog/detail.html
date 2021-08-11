@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="detail-title">
+        <h3>
+            {{post.title}}
+        </h3>
+    </div>
+    <hr>
+
+    <p id="published">{{post.publishedAt}}</p>
+    <div class="detail-article">
+        {{post.article}}
+    </div>
+    <p id="author"><b> {{post.author}}</b> </p>
+{% endblock %}
