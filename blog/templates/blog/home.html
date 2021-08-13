@@ -51,7 +51,7 @@
             {% if user.is_authenticated %}
             
                 <div class="mx-auto">
-                    <button class="btn btn-success">Create New Post</button>
+                    <a class="btn btn-success" href="{% url 'blog:post-create' %}">Create New Post</a>
 
                 </div>
             {% endif %}
