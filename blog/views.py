@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Author
@@ -30,7 +29,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "article", "image"]
+    fields = ["title", "article", "postImage"]
 
     def form_valid(self, form):
         form.instance.author = Author.objects.get(user_id=self.request.user.id)
@@ -38,8 +37,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "article", "image"]
-    
+    fields = ["title", "article", "postImage"]
+
     def form_valid(self,form):
         form.instance.author = Author.objects.get(user_id = self.request.user.id)
         return super().form_valid(form)
@@ -48,7 +47,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         post = self.get_object()
         if self.request.user.id == post.author.user.id:
             return True
-        return False 
+        return False
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post

@@ -31,12 +31,12 @@
                 <form class="d-flex">
                     {% if user.is_authenticated %}
                         <div class="dropdown">
-                          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.first_name }} {{user.last_name}}
+                          <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ user.profile.image.url }}" class="rounded-circle" width="28" height="32" alt=""> {{ user.first_name }} {{user.last_name}}
                           </a>
                         
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:profile' %}">Profile</a></li>
                             <li><a class="dropdown-item" href="{% url 'users:logout' %}">Logout</a></li>
                           </ul>
                         </div>

@@ -11,17 +11,11 @@ class Author(models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name
 
-class PostImage(models.Model):
-    image = models.ImageField(blank=True, null=True, default = "placeholder.jpg", upload_to = "postImages" )
-
-    def __str__(self):
-        return self.image.url
-
 class Post(models.Model):
     title = models.CharField(max_length=100)
     article = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
-    image = models.ForeignKey(PostImage, on_delete=models.CASCADE)
+    postImage = models.ImageField(default="placeholder.jpg", upload_to="postImages")
     publishedAt = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
