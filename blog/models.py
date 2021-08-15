@@ -1,20 +1,27 @@
 from django.db import models
 from django.urls.base import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Author(models.Model):
-    firstName = models.CharField(max_length=100)
-    lastName = models.CharField(max_length=100)
-    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     def __str__(self):
-        return self.firstName + " " + self.lastName
+        return self.user.first_name + " " + self.user.last_name
+
+class PostImage(models.Model):
+    image = models.ImageField(blank=True, null=True, default = "placeholder.jpg", upload_to = "postImages" )
+
+    def __str__(self):
+        return self.image.url
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
     article = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    image = models.ForeignKey(PostImage, on_delete=models.CASCADE)
     publishedAt = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
