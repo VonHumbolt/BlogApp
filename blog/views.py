@@ -62,3 +62,22 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+def filterPost(request):
+    filterType = request.GET["selected"]
+    query = request.GET["searchInput"]
+    
+    if filterType == "author":
+        if " " in query:
+            [firstName, lastName] = query.split(" ")
+            author = Author.objects.filter(user__first_name__icontains=firstName, user__last_name__icontains=lastName).first()
+        else:
+            author = Author.objects.filter(user__first_name__icontains=query).first()
+        
+        posts = Post.objects.filter(author = author)
+
+    elif filterType == "title":
+        posts = Post.objects.filter(title__icontains =query)
+    else:
+        posts = Post.objects.filter(article__icontains = query)
+
+    return render(request, "blog/home.html", {"posts":posts})

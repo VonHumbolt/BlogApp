@@ -31,17 +31,23 @@
 
                     </div>
                     <div class="card-body">
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="author">Author</option>
-                            <option value="title">Title</option>
-                            <option value="publishedDay">Published Day</option>
-                          </select>
+                        <form action="{% url 'blog:filter' %}">
 
-                          <div class="mb-3 mt-3">
-                            <label for="exampleDropdownFormPassword2" class="form-label"> <b> Search</b></label>
-                            <input type="search" class="form-control" id="exampleDropdownFormPassword2" placeholder="Search">
+                            {% csrf_token %}
+                            
+                            <select class="form-select" name="selected" aria-label="Default select example">
+                                <option value="author">Author</option>
+                                <option value="title">Title</option>
+                                <option value="article">Article</option>
+                            </select>
+    
+                            <div class="mb-3 mt-3">
+                                <label for="exampleDropdownFormPassword2" class="form-label"> <b> Search</b></label>
+                                <input type="search" class="form-control" id="exampleDropdownFormPassword2" name="searchInput" placeholder="Search">
                             </div>
                             <button type="submit" class="btn btn-primary">Filter</button>
+
+                        </form>
                     </div>
               
                 </div>
