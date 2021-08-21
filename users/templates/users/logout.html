@@ -1,6 +1,10 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <h3>You have been logged out</h3>
-    <a href="{% url 'users:login' %}">Login Again?</a>
+    <div class="container mt-3" style="height: 100vh;">
+    
+        <h3>You have been logged out</h3>
+        <a href="{% url 'users:login' %}">Login Again?</a>
+    
+    </div>    
 {% endblock %}

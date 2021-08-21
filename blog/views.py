@@ -4,6 +4,10 @@ from .models import Post, Author
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
+
+def introView(request):
+    return render(request, "blog/intro.html", {})
+
 class HomeView(ListView):
     template_name= "blog/home.html"
     context_object_name = "posts"

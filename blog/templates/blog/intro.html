@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <section class="text-light text-center" style="background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(212,12,187,1) 35%, rgba(0,212,255,1) 100%);">
+
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-6">
+                    <h1 class="p-4">  <span class="text-warning">Blog</span>-App</h1>
+                    <p class="lead my-3">
+                        Create an account for free and share your ideas with people. Or, read other people articles and communicate them.
+                    </p>
+                    <a href="{% url 'blog:home' %}" class="btn btn-primary my-2 mx-2 btn-lg">Explore</a>
+                    <a href="{% url 'users:register' %}" class="btn btn-primary my-2 btn-lg">Register Now </a> 
+
+                   
+
+                </div>
+                <div class="col-md-6">
+                    <img src="../../../media/backgrounds/blog.svg" alt="" class="img-fluid">
+
+                </div>
+            </div>
+                
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="#fff" fill-opacity="1" d="M0,224L48,218.7C96,213,192,203,288,192C384,181,480,171,576,186.7C672,203,768,245,864,266.7C960,288,1056,288,1152,272C1248,256,1344,224,1392,208L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+
+            </path>
+        </svg>
+    </section>
+
+{% endblock %}

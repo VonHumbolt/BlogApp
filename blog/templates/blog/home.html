@@ -1,93 +1,87 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-8">
-
-            {% if posts %}
-                {% for post in posts %}
-        
-                    <div class="card w-100 mb-3" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">{{ post.title }}</h5>
-                          <footer class="blockquote-footer mt-2"><cite title="Source Title"><a href="{% url 'blog:post-author' post.author.id %}">{{post.author}}</a> </cite></footer>
-                          <p class="card-text">{{ post.article }}</p>
-                          <a href="{% url 'blog:post-detail' post.id %}" class="btn btn-primary">Read Detail</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            {{post.publishedAt}}
-                        </div>
-                    </div>
-           
-                {% endfor %}
-            {% endif %}
-        </div>
-
-        <div class="col-4">
-            <div class="mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Filter Posts</h5>
-
-                    </div>
-                    <div class="card-body">
-                        <form action="{% url 'blog:filter' %}">
-
-                            {% csrf_token %}
-                            
-                            <select class="form-select" name="selected" aria-label="Default select example">
-                                <option value="author">Author</option>
-                                <option value="title">Title</option>
-                                <option value="article">Article</option>
-                            </select>
+    <div class="container mt-3" style="height: 100vh;">
+        <div class="row">
+            <div class="col-8">
     
-                            <div class="mb-3 mt-3">
-                                <label for="exampleDropdownFormPassword2" class="form-label"> <b> Search</b></label>
-                                <input type="search" class="form-control" id="exampleDropdownFormPassword2" name="searchInput" placeholder="Search">
+                {% if posts %}
+                    {% for post in posts %}
+            
+                        <div class="card w-100 mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ post.title }}</h5>
+                              <footer class="blockquote-footer mt-2"><cite title="Source Title"><a href="{% url 'blog:post-author' post.author.id %}">{{post.author}}</a> </cite></footer>
+                              <p class="card-text">{{ post.article }}</p>
+                              <a href="{% url 'blog:post-detail' post.id %}" class="btn btn-primary">Read Detail</a>
                             </div>
-                            <button type="submit" class="btn btn-primary">Filter</button>
-
-                        </form>
-                    </div>
-              
-                </div>
-            </div>
-
-            {% if user.is_authenticated %}
-            
-                <div class="mx-auto">
-                    <a class="btn btn-success" href="{% url 'blog:post-create' %}">Create New Post</a>
-
-                </div>
-            {% endif %}
-            
-                
+                            <div class="card-footer text-muted">
+                                {{post.publishedAt}}
+                            </div>
+                        </div>
                
-        </div>
-    </div>
-
-    {% if is_paginated %}
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-
-                {% for page in page_obj.paginator.page_range %}
-
-                    {% if page_obj.number == page %}
-                        <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
-
-                    {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
-
-                    {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+    
+            <div class="col-4">
+                <div class="mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Filter Posts</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{% url 'blog:filter' %}">
+    
+                                {% csrf_token %}
+                                
+                                <select class="form-select" name="selected" aria-label="Default select example">
+                                    <option value="author">Author</option>
+                                    <option value="title">Title</option>
+                                    <option value="article">Article</option>
+                                </select>
+        
+                                <div class="mb-3 mt-3">
+                                    <label for="exampleDropdownFormPassword2" class="form-label"> <b> Search</b></label>
+                                    <input type="search" class="form-control" id="exampleDropdownFormPassword2" name="searchInput" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+    
+                            </form>
+                        </div>
+                  
+                    </div>
+                </div>
+                
                     
-                {% endfor %}
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
-
-
-    {% endif %}
-
-
+                   
+            </div>
+        </div>
+    
+        {% if is_paginated %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    
+                    {% for page in page_obj.paginator.page_range %}
+    
+                        {% if page_obj.number == page %}
+                            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+    
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+    
+                        {% endif %}
+                        
+                    {% endfor %}
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+    
+    
+        {% endif %}
+    
+    
+    </div>
+    
 {% endblock %}
